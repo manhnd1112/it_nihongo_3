@@ -82,6 +82,9 @@ class ReviewsController < ApplicationController
 
   def find_review review
     @review = review.find_by id: params[:id]
+    unless @review
+
+    end
     redirect_to reviews_path unless @review
   end
 end

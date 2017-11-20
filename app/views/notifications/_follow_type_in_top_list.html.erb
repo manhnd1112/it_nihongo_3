@@ -1,7 +1,7 @@
 <li>
   <% if notification.follow? %>
       <%= link_to user_path(notification.from_user), method: :get do%>
-        <%= image_tag notification.to_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
+        <%= image_tag notification.from_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
         <div class="follow-notification-detail">
           <p class="text"><%= "<b>#{notification.from_user.name}</b> has followed you".html_safe%></p>
           <p><i class="icon-action fa fa-user-plus"></i><span class="time-ago">  <%= time_ago_in_words notification.updated_at%></span></p>
@@ -9,7 +9,7 @@
       <% end %>
   <% elsif notification.new_review? %>
       <%= link_to review_path(notification.review), method: :get do%>
-        <%= image_tag notification.to_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
+        <%= image_tag notification.from_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
         <div class="new-review-notification-detail">
           <p class="text"><%= "<b>#{notification.from_user.name}</b> created new review about game <b>#{notification.review.game.name}</b>: \"<b>#{notification.review.title}</b>\"".html_safe%></p>
           <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="time-ago">  <%= time_ago_in_words notification.updated_at%></span></p>
@@ -17,7 +17,7 @@
       <% end %>
   <% elsif notification.comment? %>
       <%= link_to review_path(notification.review), method: :get do%>
-          <%= image_tag notification.to_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
+          <%= image_tag notification.from_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
           <div class="comment-notification-detail">
             <p class="text"><%= "<b>#{notification.from_user.name}</b> commented on your review: \"<b>#{notification.text.to_s.split.slice(0, 10).join(" ")}</b>\"".html_safe%></p>
             <p><i class="fa fa-comment" aria-hidden="true"></i><span class="time-ago">  <%= time_ago_in_words notification.updated_at%></span></p>
@@ -25,7 +25,7 @@
       <% end %>
   <% elsif notification.like? %>
       <%= link_to review_path(notification.review), method: :get do%>
-          <%= image_tag notification.to_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
+          <%= image_tag notification.from_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
           <div class="like-notification-detail">
             <p class="text"><%= "<b>#{notification.from_user.name}</b> liked your review".html_safe%></p>
             <p><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="time-ago">  <%= time_ago_in_words notification.updated_at%></span></p>
@@ -33,7 +33,7 @@
       <% end %>
   <% elsif notification.comment_on_same_review? %>
       <%= link_to review_path(notification.review), method: :get do%>
-          <%= image_tag notification.to_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
+          <%= image_tag notification.from_user.avatar.thumb.url || "default-user.jpg", class: "avatar" %>
           <div class="comment-notification-detail">
             <% if notification.from_user_id != notification.review.user.id %>
               <p class="text"><%= "<b>#{notification.from_user.name}</b> also commented on <b>#{notification.review.user.name}</b>'s review: \"<b>#{notification.text.to_s.split.slice(0, 10).join(" ")}</b>\"".html_safe%></p>
